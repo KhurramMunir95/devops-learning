@@ -171,3 +171,168 @@ Copies both files into the `backup/` directory.
 The `cp` command copies files and directories. Use `-r` for directories, `-i` for overwrite confirmation, `-v` to see copy details, and `-n` to avoid overwriting existing files.
 
 Using absolute paths lets you copy files between locations without changing your current directory.
+
+# Linux `mv` Command
+
+## 1. Purpose
+
+The `mv` (move) command is used to:
+
+- Move files and directories from one location to another.
+- Rename files and directories.
+- Move multiple files into a destination directory.
+
+**Syntax:**
+
+```bash
+mv [OPTIONS] SOURCE DESTINATION
+```
+
+- `SOURCE`: File or directory to move or rename.
+- `DESTINATION`: Target location or new name.
+- `OPTIONS`: Flags that modify the command's behavior.
+
+## 2. Common Flags
+
+| Flag | Purpose |
+|---|---|
+| `-i` | Ask for confirmation before overwriting. |
+| `-f` | Force the operation without prompting for overwrite confirmation. |
+| `-n` | Do not overwrite an existing destination file. |
+| `-v` | Display details of the operation. |
+| `-u` | Move or overwrite only when the source is newer or the destination is missing. |
+| `-t` | Specify the target directory before the source files. |
+| `-T` | Treat the destination as a normal target, not as a directory. |
+
+**Note:** Avoid `-f` when you are unsure about overwriting important files.
+
+## 3. Practical Examples
+
+### A. Rename a file
+
+```bash
+mv old.txt new.txt
+```
+
+Renames `old.txt` to `new.txt` in the same directory.
+
+### B. Move a file into a directory
+
+```bash
+mv errors.txt backup/
+```
+
+Moves `errors.txt` into the `backup` directory.
+
+### C. Ask before overwriting
+
+```bash
+mv -i file.txt backup/
+```
+
+If a file with the same name exists in the destination, `mv` asks for confirmation before overwriting it.
+
+### D. Display operation details
+
+```bash
+mv -v errors.txt backup/
+```
+
+Displays information about the move operation.
+
+### E. Move multiple files
+
+```bash
+mv file1.txt file2.txt file3.txt backup/
+```
+
+Moves all three files into the `backup` directory.
+
+### F. Prevent overwriting
+
+```bash
+mv -n file.txt backup/
+```
+
+Does not overwrite an existing file with the same name in `backup/`.
+
+### G. Move only if the source is newer
+
+```bash
+mv -u file.txt backup/
+```
+
+Moves the file if the destination is missing or the source is newer, subject to the system's file-comparison behavior.
+
+When you run mv -u budget.xlsx Destination/, the computer acts like a smart assistant and looks at the "Last Modified" date and time (timestamp) of both files before doing anything:
+• Scenario A (Source is newer): Your source file was saved at 5:00 PM, but the one in the destination folder was saved at 2:00 PM. The assistant sees your source file is newer, so it moves it and overwrites the old one.
+• Scenario B (Destination is newer): Your source file was saved at 2:00 PM, but the one in the destination folder was saved at 5:00 PM. The assistant realizes you would lose your latest updates if it moved the old file over it. So, it does nothing and safely skips it.
+• Scenario C (File doesn't exist yet): There is no budget.xlsx in the destination folder at all. The assistant just moves it normally.
+
+### H. Specify the target directory first
+
+```bash
+mv -t backup/ file1.txt file2.txt
+```
+
+Moves both files into `backup/`.
+
+### I. Treat the destination as a file target
+
+```bash
+mv -T old.txt new.txt
+```
+
+Treats `new.txt` as the exact destination path rather than interpreting it as a directory.
+
+## 4. Move a Directory
+
+```bash
+mv project/ backup/
+```
+
+Moves the `project` directory into `backup/`.
+
+## 5. Practice Exercise
+
+Create a practice directory and perform the following tasks:
+
+```bash
+mkdir -p ~/mv-practice/backup
+cd ~/mv-practice
+
+touch test.txt old.txt
+mv -v test.txt backup/
+mv old.txt new.txt
+
+ls -l
+ls -l backup/
+```
+
+**Expected results:**
+
+- `test.txt` is inside `backup/`.
+- `old.txt` is renamed to `new.txt`.
+- `new.txt` remains in the current directory.
+
+## 6. Important Notes
+
+- `mv` moves or renames; it does not normally create an additional copy.
+- Use `pwd` to check your current directory.
+- Use `ls` to verify file locations.
+- Use `mv -i` when you want protection against accidental overwrites.
+- A move across different filesystems may require copying and deleting internally.
+
+## 7. Quick Revision
+
+| Task | Command |
+|---|---|
+| Rename a file | `mv old.txt new.txt` |
+| Move a file | `mv file.txt backup/` |
+| Show operation details | `mv -v file.txt backup/` |
+| Confirm before overwrite | `mv -i file.txt backup/` |
+| Prevent overwrite | `mv -n file.txt backup/` |
+| Move multiple files | `mv a.txt b.txt backup/` |
+
+**Key takeaway:** Use `mv` to change a file's location or name. Choose flags such as `-i`, `-n`, and `-v` according to the behavior you need.
+
