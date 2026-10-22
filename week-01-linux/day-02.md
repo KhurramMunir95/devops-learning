@@ -336,3 +336,279 @@ ls -l backup/
 
 **Key takeaway:** Use `mv` to change a file's location or name. Choose flags such as `-i`, `-n`, and `-v` according to the behavior you need.
 
+# Linux `rm` Command
+
+## 1. What is the `rm` Command?
+
+The `rm` command stands for **remove**. It is used to delete files and directories in Linux.
+
+**Syntax:**
+
+```bash
+rm [OPTIONS] FILE
+```
+
+## 2. Common `rm` Flags
+
+| Flag | Description |
+|---|---|
+| `-i` | Ask for confirmation before each removal |
+| `-f` | Force removal; do not prompt for confirmation or report missing files |
+| `-r` | Remove directories and their contents recursively |
+| `-R` | Same as `-r` |
+| `-d` | Remove empty directories |
+| `-v` | Display details about removed files |
+| `-I` | Ask for confirmation once before removing multiple files or performing recursive removal |
+
+## 3. Basic Examples
+
+### 3.1 Delete a File
+
+```bash
+rm file.txt
+```
+
+Deletes `file.txt`.
+
+### 3.2 Delete Multiple Files
+
+```bash
+rm file1.txt file2.txt file3.txt
+```
+
+Deletes all three files.
+
+### 3.3 Delete a File with Confirmation (`-i`)
+
+```bash
+rm -i file.txt
+```
+
+Prompts for confirmation before deleting the file.
+
+Example:
+
+```text
+rm: remove regular file 'file.txt'?
+```
+
+- `y`: Confirm deletion.
+- `n`: Cancel deletion.
+
+### 3.4 Force Delete (`-f`)
+
+```bash
+rm -f file.txt
+```
+
+- Does not prompt for confirmation.
+- Does not report an error if the file does not exist.
+- Does not bypass file permissions or other system restrictions.
+
+### 3.5 Delete a Directory Recursively (`-r`)
+
+```bash
+rm -r folder1
+```
+
+Deletes `folder1`, including its files and subdirectories.
+
+Example directory structure:
+
+```text
+folder1/
+├── file1.txt
+├── file2.txt
+└── subfolder/
+    └── file3.txt
+```
+
+After running `rm -r folder1`, the entire directory structure is removed.
+
+### 3.6 Force Delete a Directory (`-rf`)
+
+```bash
+rm -rf folder1
+```
+
+- `-r`: Recursively removes the directory and its contents.
+- `-f`: Suppresses confirmation prompts and errors for missing files.
+
+**Warning:** This command can permanently remove large amounts of data. Always verify the target path before executing it.
+
+### 3.7 Display Removed Files (`-v`)
+
+```bash
+rm -v file.txt
+```
+
+Displays the name of the file being removed.
+
+You can also combine it with other flags:
+
+```bash
+rm -rv folder1
+```
+
+### 3.8 Delete an Empty Directory (`-d`)
+
+```bash
+rm -d empty_folder
+```
+
+Removes the directory only if it is empty.
+
+If the directory contains files or subdirectories, the command fails.
+
+### 3.9 Confirmation for Multiple Removals (`-I`)
+
+```bash
+rm -I *.txt
+```
+
+Requests confirmation before removing multiple matching files.
+
+The `*.txt` pattern matches files ending in `.txt` in the current directory.
+
+## 4. Combining Flags
+
+Multiple flags can be combined in one command.
+
+```bash
+rm -riv folder1
+```
+
+- `-r`: Recursively remove the directory and its contents.
+- `-i`: Ask for confirmation before each removal.
+- `-v`: Display removal details.
+
+Use `-i` when you want to review each deletion.
+
+## 5. Using `rm` with Paths
+
+### Delete a File Using an Absolute Path
+
+```bash
+rm /mnt/e/linux/test1.txt
+```
+
+Deletes `test1.txt` from the specified location.
+
+### Delete a File Using a Relative Path
+
+```bash
+rm folder1/test1.txt
+```
+
+Deletes the file relative to the current working directory.
+
+Check your current directory:
+
+```bash
+pwd
+```
+
+## 6. Delete Files Using Wildcards
+
+### Delete All `.txt` Files in the Current Directory
+
+```bash
+rm *.txt
+```
+
+### Delete Files Starting with `test`
+
+```bash
+rm test*
+```
+
+**Caution:** Wildcards can match more files than expected. Use `ls` first to inspect the matching files.
+
+```bash
+ls *.txt
+```
+
+## 7. `rm` vs `rmdir`
+
+| Command | Purpose |
+|---|---|
+| `rm file.txt` | Removes a file |
+| `rm -r folder1` | Removes a directory and its contents |
+| `rm -d empty_folder` | Removes an empty directory |
+| `rmdir empty_folder` | Removes an empty directory |
+
+`rmdir` cannot remove a non-empty directory.
+
+## 8. Important Safety Rules
+
+1. `rm` does not normally move files to the Trash; deleted files may be difficult or impossible to recover.
+2. Always verify the filename and path before using `rm`.
+3. Use `rm -i` when you need confirmation.
+4. Be especially careful with `rm -rf`.
+5. Never run a destructive command with an unverified variable or path.
+6. Avoid running `rm` with `sudo` unless elevated permissions are genuinely necessary.
+
+## 9. Practice Exercises
+
+Create a practice directory:
+
+```bash
+mkdir -p ~/rm-practice/subfolder
+touch ~/rm-practice/file1.txt
+touch ~/rm-practice/subfolder/file2.txt
+```
+
+### Exercise 1: Inspect the Directory
+
+```bash
+ls -R ~/rm-practice
+```
+
+### Exercise 2: Remove a File with Verbose Output
+
+```bash
+rm -v ~/rm-practice/file1.txt
+```
+
+### Exercise 3: Remove a File with Confirmation
+
+```bash
+rm -i ~/rm-practice/subfolder/file2.txt
+```
+
+### Exercise 4: Try Removing a Non-Empty Directory
+
+```bash
+rmdir ~/rm-practice
+```
+
+Observe why it fails: the directory is not empty.
+
+### Exercise 5: Remove the Remaining Directory
+
+```bash
+rm -r ~/rm-practice
+```
+
+Verify the result:
+
+```bash
+ls ~/rm-practice
+```
+
+The command should report that the directory does not exist.
+
+## 10. Quick Revision
+
+- `rm`: Remove files.
+- `rm -i`: Ask before removing.
+- `rm -f`: Force removal.
+- `rm -r`: Remove directories recursively.
+- `rm -rf`: Force recursive removal.
+- `rm -v`: Show removal details.
+- `rm -d`: Remove an empty directory.
+- `rm -I`: Ask once before a potentially large removal.
+- `rmdir`: Remove an empty directory only.
+
+**Remember:** `rm` deletes, `mv` moves or renames, and `cp` copies.
+
