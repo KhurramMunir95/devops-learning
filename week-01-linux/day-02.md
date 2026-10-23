@@ -865,3 +865,204 @@ cat practice.txt
 - Use `>` carefully because it can overwrite existing data.
 
 **Practice goal:** Be able to explain the common flags, create and append files safely, and inspect text files from the terminal.
+
+# Linux `less` Command
+
+## 1. What Is the `less` Command?
+
+The `less` command is used to view the contents of a file one screen at a time. It is especially useful for reading large files, application logs, and configuration files.
+
+Unlike `cat`, `less` allows you to navigate forward and backward through file content without modifying the file.
+
+## 2. Basic Syntax
+
+```bash
+less [OPTIONS] FILE
+```
+
+**Example:**
+
+```bash
+less application.log
+```
+
+This opens `application.log` in the `less` viewer.
+
+## 3. Common `less` Flags
+
+| Flag | Description | Example |
+|---|---|---|
+| `-N` | Display line numbers | `less -N file.txt` |
+| `-S` | Prevent long lines from wrapping | `less -S file.txt` |
+| `-i` | Ignore case unless the search pattern contains uppercase letters | `less -i file.txt` |
+| `-I` | Ignore case in all searches | `less -I file.txt` |
+| `-F` | Exit automatically if the content fits on one screen | `less -F file.txt` |
+| `-R` | Display supported ANSI color codes | `less -R file.txt` |
+| `-X` | Do not clear the terminal screen when exiting | `less -X file.txt` |
+| `-M` | Display a detailed status prompt | `less -M file.txt` |
+| `-m` | Display a brief status prompt | `less -m file.txt` |
+| `-E` | Exit when reaching the end of the file | `less -E file.txt` |
+| `-e` | Exit when reaching the end a second time | `less -e file.txt` |
+| `-n` | Suppress line numbers in the status display | `less -n file.txt` |
+| `-s` | Collapse consecutive empty lines into one | `less -s file.txt` |
+| `-p PATTERN` | Start at the first occurrence of a pattern | `less -p ERROR file.txt` |
+
+## 4. Combining Flags
+
+Multiple flags can be combined in a single command.
+
+```bash
+less -N -S application.log
+```
+
+This displays line numbers and prevents long lines from wrapping.
+
+The following command is equivalent:
+
+```bash
+less -NS application.log
+```
+
+**More examples:**
+
+```bash
+less -Ni application.log
+less -RN application.log
+less -XN file.txt
+```
+
+## 5. Navigation Keyboard Shortcuts
+
+These commands are used after opening a file in `less`.
+
+| Key | Description |
+|---|---|
+| `Space` | Move forward one screen |
+| `b` | Move backward one screen |
+| `Enter` | Move down one line |
+| `j` | Move down one line |
+| `k` | Move up one line |
+| `d` | Move forward half a screen |
+| `u` | Move backward half a screen |
+| `g` | Go to the beginning of the file |
+| `G` | Go to the end of the file |
+| `/pattern` | Search forward |
+| `?pattern` | Search backward |
+| `n` | Go to the next search match |
+| `N` | Go to the previous search match |
+| `h` | Display help |
+| `q` | Quit `less` |
+
+## 6. Useful Examples
+
+### View a File
+
+```bash
+less file.txt
+```
+
+### View a File with Line Numbers
+
+```bash
+less -N file.txt
+```
+
+### View Long Lines Without Wrapping
+
+```bash
+less -S application.log
+```
+
+Use the left and right arrow keys to scroll horizontally.
+
+### Open a File at the End
+
+```bash
+less +G application.log
+```
+
+### Search for Errors
+
+```bash
+less -p ERROR application.log
+```
+
+### Read Command Output Page by Page
+
+```bash
+ls -la /etc | less
+```
+
+### View Matching Log Entries
+
+```bash
+grep "ERROR" application.log | less
+```
+
+### Display Colored Output
+
+```bash
+ls --color=always | less -R
+```
+
+The `-R` flag allows supported color escape sequences to be displayed correctly.
+
+## 7. Difference Between `cat`, `more`, and `less`
+
+| Feature | `cat` | `more` | `less` |
+|---|---|---|---|
+| Displays file content | Yes | Yes | Yes |
+| Page-by-page navigation | No | Yes | Yes |
+| Scroll backward | No | Limited | Yes |
+| Interactive searching | No | Basic | Yes |
+| Best use | Small files | Basic pagination | Large files and logs |
+
+## 8. Practical DevOps Use Cases
+
+- **Log analysis:** Read application and system logs.
+- **Troubleshooting:** Search for `ERROR`, `WARNING`, or other patterns.
+- **Configuration review:** Inspect Nginx and other service configuration files.
+- **Large output:** Navigate through lengthy command output without flooding the terminal.
+- **Production debugging:** Inspect log files without modifying them.
+
+Example:
+
+```bash
+less -N /var/log/nginx/error.log
+```
+
+This opens the Nginx error log with line numbers.
+
+## 9. Practice Tasks
+
+1. Open a text file using `less`.
+2. Display the file with line numbers using `-N`.
+3. Prevent long lines from wrapping using `-S`.
+4. Search for `ERROR` using `/ERROR`.
+5. Navigate to the end using `G`.
+6. Return to the beginning using `g`.
+7. Exit using `q`.
+
+## 10. Quick Revision
+
+- `less`: View file content page by page.
+- `-N`: Display line numbers.
+- `-S`: Prevent long-line wrapping.
+- `-i` / `-I`: Configure case-insensitive searching.
+- `-R`: Display supported color codes.
+- `-F`: Exit if content fits on one screen.
+- `-p`: Start at a matching pattern.
+- `/pattern`: Search forward.
+- `n`: Next match.
+- `q`: Quit.
+
+**Best practice:** Use `less` for large log files, `grep` to filter matching lines, and `less -N` when line numbers are useful for debugging.
+
+## 11. Getting Help
+
+```bash
+less --help
+man less
+```
+
+Use `man less` to read the manual for your installed version.
