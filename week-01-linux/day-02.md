@@ -1066,3 +1066,588 @@ man less
 ```
 
 Use `man less` to read the manual for your installed version.
+
+
+# Linux `head` Command
+
+## 1. Introduction
+
+The `head` command displays the beginning of a file.
+
+- By default, it displays the first **10 lines**.
+- It can display a specific number of lines or bytes.
+- It is useful for inspecting log files, CSV files, and configuration files.
+
+## 2. Syntax
+
+```bash
+head [OPTIONS] [FILE]
+```
+
+**Example:**
+
+```bash
+head app.log
+```
+
+Displays the first 10 lines of `app.log`.
+
+## 3. Important Flags
+
+| Flag | Description |
+|---|---|
+| `-n NUM` | Display the first NUM lines. |
+| `-c NUM` | Display the first NUM bytes. |
+| `-n -NUM` | Display all lines except the last NUM lines. |
+| `-c -NUM` | Display all bytes except the last NUM bytes. |
+| `-q` | Suppress file-name headers when displaying multiple files. |
+| `-v` | Always display file-name headers. |
+| `-z` | Use NUL characters as line delimiters (GNU `head`). |
+| `--help` | Display help information (GNU `head`). |
+| `--version` | Display version information (GNU `head`). |
+
+## 4. Basic Examples
+
+### 4.1 Display the First 10 Lines
+
+```bash
+head app.log
+```
+
+Displays the first 10 lines by default.
+
+### 4.2 Display the First 5 Lines
+
+```bash
+head -n 5 app.log
+```
+
+Displays only the first 5 lines.
+
+### 4.3 Display the First Line
+
+```bash
+head -n 1 app.log
+```
+
+Displays only the first line.
+
+### 4.4 Display the First 20 Lines
+
+```bash
+head -n 20 app.log
+```
+
+Displays the first 20 lines.
+
+### 4.5 Use the Short Form
+
+```bash
+head -5 app.log
+```
+
+Equivalent to `head -n 5 app.log`.
+
+### 4.6 Display the First 20 Bytes
+
+```bash
+head -c 20 app.log
+```
+
+Displays the first 20 bytes, not 20 lines or necessarily 20 characters.
+
+## 5. Negative Values
+
+### 5.1 Exclude the Last 2 Lines
+
+```bash
+head -n -2 app.log
+```
+
+Displays all lines except the last 2.
+
+### 5.2 Exclude the Last 10 Bytes
+
+```bash
+head -c -10 app.log
+```
+
+Displays all bytes except the last 10.
+
+**Note:** Negative values are supported by GNU `head` and may not work on every Unix implementation.
+
+## 6. Working with Multiple Files
+
+### 6.1 Display Multiple Files
+
+```bash
+head -n 3 app.log error.log
+```
+
+Displays the first 3 lines of each file, with file-name headers.
+
+### 6.2 Suppress File-Name Headers
+
+```bash
+head -q -n 3 app.log error.log
+```
+
+Displays the first 3 lines from each file without file-name headers.
+
+### 6.3 Always Display File-Name Headers
+
+```bash
+head -v app.log
+```
+
+Displays the file-name header even when reading a single file.
+
+## 7. Using `head` with Pipes
+
+### 7.1 Display the First 5 Lines of Command Output
+
+```bash
+ls -l | head -n 5
+```
+
+Displays the first 5 lines of the directory listing.
+
+### 7.2 Display the First 5 Matching Errors
+
+```bash
+grep "ERROR" app.log | head -n 5
+```
+
+Finds lines containing `ERROR` and displays the first 5 matches.
+
+### 7.3 Preview CSV Data
+
+```bash
+head -n 10 users.csv
+```
+
+Displays the header and the first 9 data rows, assuming the CSV contains a header row.
+
+### 7.4 Read from Standard Input
+
+```bash
+cat app.log | head -n 5
+```
+
+Displays the first 5 lines from standard input.
+
+For a single file, prefer:
+
+```bash
+head -n 5 app.log
+```
+
+## 8. Practical Linux and DevOps Use Cases
+
+### Inspect a Log File
+
+```bash
+head -n 20 /var/log/syslog
+```
+
+Quickly inspect the beginning of a system log.
+
+### Preview a Configuration File
+
+```bash
+head -n 10 /etc/hosts
+```
+
+Inspect the first 10 lines of the hosts file.
+
+### Preview a Large File
+
+```bash
+head -n 5 large-file.txt
+```
+
+Read a small portion without printing the entire file to the terminal.
+
+### Find the First 3 Errors
+
+```bash
+grep "ERROR" app.log | head -n 3
+```
+
+Useful for quickly reviewing error messages.
+
+## 9. Difference Between `head`, `tail`, and `less`
+
+| Command | Purpose | Example |
+|---|---|---|
+| `head` | Display the beginning of a file. | `head -n 10 app.log` |
+| `tail` | Display the end of a file. | `tail -n 10 app.log` |
+| `less` | Navigate through a file interactively. | `less app.log` |
+
+For continuously monitoring new log entries, use:
+
+```bash
+tail -f app.log
+```
+
+## 10. Important Points to Remember
+
+1. `head` displays the first 10 lines by default.
+2. Use `-n` to control the number of lines.
+3. Use `-c` to control the number of bytes.
+4. Negative values can exclude content from the end when using GNU `head`.
+5. Use `-q` to suppress file-name headers for multiple files.
+6. Use `-v` to always display file-name headers.
+7. Use pipes to process the output of other Linux commands.
+8. `head` is commonly used to inspect logs and large files quickly.
+
+## 11. Practice Exercises
+
+Try these commands using your own files.
+
+1. Display the first 5 lines of `app.log`.
+2. Display the first 15 bytes of `app.log`.
+3. Display all lines except the last 3 lines.
+4. Display the first 3 lines containing `ERROR`.
+5. Display the first 5 lines from two files without file-name headers.
+6. Display the first 10 lines of `/etc/hosts`.
+
+### Practice Answers
+
+```bash
+# 1. First 5 lines
+head -n 5 app.log
+
+# 2. First 15 bytes
+head -c 15 app.log
+
+# 3. All lines except the last 3
+head -n -3 app.log
+
+# 4. First 3 ERROR matches
+grep "ERROR" app.log | head -n 3
+
+# 5. First 5 lines from two files, without headers
+head -q -n 5 app.log error.log
+
+# 6. First 10 lines of /etc/hosts
+head -n 10 /etc/hosts
+```
+
+## 12. Quick Revision
+
+| Requirement | Command |
+|---|---|
+| First 10 lines | `head file.txt` |
+| First 5 lines | `head -n 5 file.txt` |
+| First line | `head -n 1 file.txt` |
+| First 20 bytes | `head -c 20 file.txt` |
+| Exclude last 2 lines | `head -n -2 file.txt` |
+| First 3 lines of multiple files | `head -n 3 file1.txt file2.txt` |
+| Suppress file headers | `head -q file1.txt file2.txt` |
+| Show file headers | `head -v file.txt` |
+| First 5 matching errors | `grep "ERROR" file.txt \| head -n 5` |
+
+**Final takeaway:** Use `head` when you need to inspect the beginning of a file or limit the output of another command.
+
+# Linux `tail` Command
+
+## 1. What Is `tail`?
+
+The `tail` command displays the last part of a file. By default, it displays the last **10 lines**.
+
+### Syntax
+
+```bash
+tail [OPTIONS] [FILE]
+```
+
+### Example
+
+```bash
+tail app.log
+```
+
+Displays the last 10 lines of `app.log`.
+
+---
+
+## 2. Common `tail` Options
+
+| Option | Description | Example |
+|---|---|---|
+| `-n N` | Display the last N lines | `tail -n 5 app.log` |
+| `-n +N` | Display from line N to the end | `tail -n +5 app.log` |
+| `-c N` | Display the last N bytes | `tail -c 100 app.log` |
+| `-f` | Follow new content added to a file | `tail -f app.log` |
+| `-F` | Follow a file by name, including after rotation or recreation | `tail -F app.log` |
+| `-q` | Suppress filename headers when reading multiple files | `tail -q file1.txt file2.txt` |
+| `-v` | Always display filenames | `tail -v app.log` |
+| `-s N` | Set the interval between follow checks in seconds | `tail -f -s 2 app.log` |
+| `--pid=PID` | Stop following when the specified process exits | `tail --pid=1234 -f app.log` |
+| `--help` | Display help information | `tail --help` |
+
+---
+
+## 3. Display a Specific Number of Lines
+
+### Display the last 5 lines
+
+```bash
+tail -n 5 app.log
+```
+
+### Display the last 50 lines
+
+```bash
+tail -n 50 app.log
+```
+
+### Display content from line 5 to the end
+
+```bash
+tail -n +5 app.log
+```
+
+**Important difference:**
+
+- `tail -n 5 file.txt` — displays the last 5 lines.
+- `tail -n +5 file.txt` — displays from line 5 through the end of the file.
+
+---
+
+## 4. Monitor Logs in Real Time
+
+### Follow a log file
+
+```bash
+tail -f app.log
+```
+
+Displays the last 10 lines and continues showing new lines as they are appended.
+
+Press `Ctrl + C` to stop monitoring.
+
+### Display the last 20 lines and continue monitoring
+
+```bash
+tail -n 20 -f app.log
+```
+
+### Follow a log after rotation
+
+```bash
+tail -F app.log
+```
+
+The `-F` option keeps trying to follow the file by name if it is rotated, removed, or recreated.
+
+### Monitor multiple log files
+
+```bash
+tail -f app.log error.log
+```
+
+Displays new content from both files.
+
+---
+
+## 5. Display Line Numbers with `tail`
+
+The `tail` command does not have a built-in option to number each output line. You can combine it with `nl`.
+
+### Number the last 10 lines
+
+```bash
+tail -n 10 app.log | nl
+```
+
+This numbers the displayed output starting from 1. It does not preserve the original file line numbers.
+
+### Preserve original line numbers
+
+```bash
+nl -ba app.log | tail -n 10
+```
+
+- `nl` — numbers lines.
+- `-ba` — numbers all lines, including blank lines.
+- `tail -n 10` — displays the last 10 numbered lines.
+
+**Note:** `nl -ba app.log | tail -n 10` processes and numbers the entire file before selecting the last 10 lines. For very large files, this can be less efficient.
+
+---
+
+## 6. Remove Empty Lines
+
+The `tail` command does not remove blank lines. Use `sed` or `grep` for this task.
+
+### Display a file without empty lines
+
+```bash
+sed '/^$/d' app.log
+```
+
+### Also remove lines containing only spaces or tabs
+
+```bash
+sed '/^[[:space:]]*$/d' app.log
+```
+
+### Remove blank lines and display the last 10 remaining lines
+
+```bash
+sed '/^[[:space:]]*$/d' app.log | tail -n 10
+```
+
+These commands display the result without changing the original file.
+
+---
+
+## 7. Filter Errors from Logs
+
+### Display the last 50 lines containing `ERROR`
+
+```bash
+grep 'ERROR' app.log | tail -n 50
+```
+
+### Monitor new errors in real time
+
+```bash
+tail -f app.log | grep --line-buffered 'ERROR'
+```
+
+### Match errors regardless of letter case
+
+```bash
+tail -f app.log | grep --line-buffered -i 'error'
+```
+
+### Monitor warnings and errors
+
+```bash
+tail -f app.log | grep --line-buffered -Ei 'warning|error'
+```
+
+`--line-buffered` helps matching lines appear promptly when `grep` is used in a pipeline.
+
+---
+
+## 8. Display the Last Part of a File in Bytes
+
+### Display the last 100 bytes
+
+```bash
+tail -c 100 app.log
+```
+
+The `-c` option counts bytes rather than lines. It is useful when inspecting the end of a file at the byte level.
+
+---
+
+## 9. Practical DevOps Examples
+
+### Inspect recent application logs
+
+```bash
+tail -n 100 app.log
+```
+
+### Monitor an application while reproducing a bug
+
+```bash
+tail -f app.log
+```
+
+### Monitor errors in production logs
+
+```bash
+tail -f app.log | grep --line-buffered -i 'error'
+```
+
+### Inspect recent system messages
+
+```bash
+tail -n 50 /var/log/syslog
+```
+
+The `/var/log/syslog` file is available on some Linux distributions; other systems may use different log files or `journalctl`.
+
+### Monitor systemd service logs
+
+```bash
+journalctl -u nginx -f
+```
+
+This is an alternative to `tail` when logs are managed by systemd's journal.
+
+---
+
+## 10. `head` vs `tail`
+
+| Feature | `head` | `tail` |
+|---|---|---|
+| Default output | First 10 lines | Last 10 lines |
+| `-n 5` | First 5 lines | Last 5 lines |
+| `-n +5` | From line 5 to the end | From line 5 to the end |
+| Real-time following | Not supported by standard GNU `head` | Supported with `-f` |
+| Common use | Inspect file beginnings | Inspect recent logs |
+
+---
+
+## 11. Practice Exercises
+
+Try these commands in your Ubuntu/WSL terminal.
+
+1. Display the last 15 lines of `app.log`.
+2. Display the last 30 lines and monitor new content.
+3. Display everything from line 8 to the end.
+4. Display the last 10 lines with original line numbers.
+5. Remove blank lines and display the last 10 remaining lines.
+6. Display the last 50 lines containing `ERROR`.
+7. Monitor new log entries containing either `WARNING` or `ERROR`.
+8. Follow a log file even if it is recreated.
+
+### Answers
+
+```bash
+# 1. Last 15 lines
+tail -n 15 app.log
+
+# 2. Last 30 lines and follow new content
+tail -n 30 -f app.log
+
+# 3. From line 8 to the end
+tail -n +8 app.log
+
+# 4. Last 10 lines with original line numbers
+nl -ba app.log | tail -n 10
+
+# 5. Last 10 non-blank lines
+sed '/^[[:space:]]*$/d' app.log | tail -n 10
+
+# 6. Last 50 matching error lines
+grep 'ERROR' app.log | tail -n 50
+
+# 7. Monitor warnings and errors
+tail -f app.log | grep --line-buffered -Ei 'warning|error'
+
+# 8. Follow a recreated or rotated file
+tail -F app.log
+```
+
+---
+
+## 12. Key Takeaways
+
+- `tail` displays the last 10 lines by default.
+- `-n` controls how many lines are displayed.
+- `-n +N` displays content starting at line N.
+- `-f` monitors new content in real time.
+- `-F` is useful when log files are rotated or recreated.
+- `nl -ba file | tail -n N` displays the last N lines with original line numbers.
+- `sed '/^[[:space:]]*$/d'` removes blank lines from displayed output.
+- Combining `tail` with `grep` is useful for troubleshooting application and server logs.
+
+**DevOps habit:** Use `tail -f` or `journalctl -f` to observe logs while reproducing a problem, then filter relevant messages to narrow down the cause.
