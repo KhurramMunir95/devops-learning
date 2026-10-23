@@ -612,3 +612,256 @@ The command should report that the directory does not exist.
 
 **Remember:** `rm` deletes, `mv` moves or renames, and `cp` copies.
 
+# Linux `cat` Command
+
+## 1. Overview
+
+The `cat` command stands for **concatenate**. It is used to display file contents, combine multiple files, create files, and append content to existing files.
+
+### Syntax
+
+```bash
+cat [OPTIONS] [FILE...]
+```
+
+## 2. Common Options (Flags)
+
+| Flag | Description |
+|---|---|
+| `-n` | Number all lines, including blank lines |
+| `-b` | Number only non-empty lines |
+| `-s` | Squeeze consecutive blank lines into one |
+| `-A` | Display non-printing characters, tabs, and line endings visibly |
+| `-E` | Display `$` at the end of each line |
+| `-T` | Display tab characters as `^I` |
+| `-v` | Display most non-printing characters visibly |
+| `--help` | Display help information |
+| `--version` | Display version information |
+
+## 3. Basic Usage
+
+### 3.1 Display a File
+
+```bash
+cat file.txt
+```
+
+Displays the contents of `file.txt` in the terminal.
+
+### 3.2 Display Multiple Files
+
+```bash
+cat file1.txt file2.txt
+```
+
+Displays the contents of both files sequentially.
+
+### 3.3 Display Line Numbers
+
+```bash
+cat -n file.txt
+```
+
+Numbers all lines, including blank lines.
+
+### 3.4 Number Only Non-Empty Lines
+
+```bash
+cat -b file.txt
+```
+
+Numbers lines containing text while leaving blank lines unnumbered.
+
+### 3.5 Squeeze Blank Lines
+
+```bash
+cat -s file.txt
+```
+
+Displays consecutive blank lines as a single blank line. It does not modify the original file.
+
+## 4. Creating and Modifying Files
+
+### 4.1 Create a File
+
+```bash
+cat > notes.txt
+```
+
+Type your content and press `Ctrl + D` to finish.
+
+**Important:** If `notes.txt` already exists, its previous contents will be overwritten.
+
+### 4.2 Append Content to a File
+
+```bash
+cat >> notes.txt
+```
+
+Adds new content to the end of the file without removing existing content. Press `Ctrl + D` to finish.
+
+### 4.3 Combine Multiple Files
+
+```bash
+cat file1.txt file2.txt > combined.txt
+```
+
+Combines the contents of both input files into `combined.txt`.
+
+**Important:** The `>` operator overwrites the destination file if it already exists.
+
+## 5. Inspecting Special Characters
+
+### 5.1 Display Line Endings
+
+```bash
+cat -E file.txt
+```
+
+Displays `$` at the end of each line, making line boundaries easier to inspect.
+
+### 5.2 Display Tab Characters
+
+```bash
+cat -T file.txt
+```
+
+Displays tab characters as `^I`.
+
+### 5.3 Display Non-Printing Characters
+
+```bash
+cat -v file.txt
+```
+
+Makes most non-printing characters visible.
+
+### 5.4 Display All Common Whitespace Markers
+
+```bash
+cat -A file.txt
+```
+
+Displays tabs, line endings, and other supported non-printing characters visibly.
+
+These options are useful when troubleshooting formatting problems in configuration files and text data.
+
+## 6. Combining Options
+
+Multiple options can be used together.
+
+### Number All Lines and Show Line Endings
+
+```bash
+cat -n -E file.txt
+```
+
+### Number Non-Empty Lines and Squeeze Blank Lines
+
+```bash
+cat -b -s file.txt
+```
+
+## 7. Using `cat` with Pipes
+
+A pipe (`|`) sends the output of one command to another command.
+
+### Search for Errors
+
+```bash
+cat app.log | grep "ERROR"
+```
+
+Displays lines containing `ERROR`.
+
+A more efficient alternative is:
+
+```bash
+grep "ERROR" app.log
+```
+
+This avoids using `cat` unnecessarily.
+
+### Count Lines
+
+```bash
+cat file.txt | wc -l
+```
+
+A simpler alternative is:
+
+```bash
+wc -l file.txt
+```
+
+## 8. `cat` vs Other Commands
+
+| Command | Main Purpose |
+|---|---|
+| `cat` | Display or concatenate file contents |
+| `less` | Read large files page by page |
+| `head` | Display the first lines of a file |
+| `tail` | Display the last lines of a file |
+| `tail -f` | Follow new log entries in real time |
+| `grep` | Search for matching text |
+| `wc` | Count lines, words, and bytes |
+
+## 9. Practical Exercises
+
+Run the following commands in your Linux terminal.
+
+### Exercise 1: Create a Practice File
+
+```bash
+printf 'Linux\n\nDocker\nDevOps\n' > practice.txt
+```
+
+### Exercise 2: Display the File
+
+```bash
+cat practice.txt
+```
+
+### Exercise 3: Display All Line Numbers
+
+```bash
+cat -n practice.txt
+```
+
+### Exercise 4: Number Non-Empty Lines
+
+```bash
+cat -b practice.txt
+```
+
+### Exercise 5: Inspect Line Endings
+
+```bash
+cat -E practice.txt
+```
+
+### Exercise 6: Append New Content
+
+```bash
+echo "Nginx" >> practice.txt
+```
+
+### Exercise 7: Verify the Changes
+
+```bash
+cat practice.txt
+```
+
+## 10. Key Takeaways
+
+- `cat file.txt` displays file contents.
+- `cat -n file.txt` numbers all lines.
+- `cat -b file.txt` numbers only non-empty lines.
+- `cat > file.txt` creates or overwrites a file.
+- `cat >> file.txt` appends content.
+- `cat file1 file2 > combined.txt` combines files.
+- `cat -A file.txt` helps inspect special characters.
+- Use `less` for large files and `tail -f` for live logs.
+- Use `>` carefully because it can overwrite existing data.
+
+**Practice goal:** Be able to explain the common flags, create and append files safely, and inspect text files from the terminal.
