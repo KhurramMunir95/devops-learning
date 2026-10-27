@@ -9,6 +9,7 @@ A hands-on DevOps learning journey focused on practical skills, daily progress, 
 - **Documentation:** Maintain daily Markdown notes with commands, examples, outputs, and troubleshooting
 - **Version control:** Commit and push daily progress to GitHub
 - **Weekly review:** Review completed tasks, challenges, and learning outcomes
+- **Learning approach:** Complete one guided session at a time and revisit previous topics to reinforce retention
 
 ## Learning Roadmap
 
@@ -21,48 +22,133 @@ A hands-on DevOps learning journey focused on practical skills, daily progress, 
 
 ### Week 01 — Linux Fundamentals
 
-- [x] **Day 01 — Linux Navigation and Filesystem Basics**
+#### Day 1: Linux Filesystem & Navigation
 
-  - Working with directories and paths
-  - Understanding the home directory (`~`) and filesystem root (`/`)
-  - Commands: `pwd`, `whoami`, `ls`, `cd`, `mkdir`, `touch`
-  - Status: Topics planned; verify the practical exercise and notes before marking the day fully complete.
+**Commands:** `pwd`, `ls`, `cd`, `mkdir`, `touch`
 
-- [x] **Day 02 — File Operations and Reading**
+**Practice:**
+- Create folders and files inside `~/devops-lab/day1/`.
+- Navigate between different directories.
+- Understand absolute and relative paths.
+- Explore the home directory (`~`) and filesystem root (`/`).
 
-  - Copying, moving, and deleting files: `cp`, `mv`, `rm`
-  - Reading files: `cat`, `less`
-  - Displaying the beginning and end of files: `head`, `tail`
-  - Practice: `tail` flags, line numbering, and removing blank lines
-  - Status: In progress — commands and examples are being explored; verify the complete exercise before marking done.
+**Outcome:** Create and navigate a basic Linux directory structure.
 
-- [ ] **Day 03 — Linux File Permissions**
+**Notes:** `week-01-linux/day-01.md`
 
-  - File permissions: read, write, and execute
-  - Commands: `chmod`, `chown`, `ls -l`
-  - Understanding permission notation and ownership
+- [ ] Verify the practical exercise and documentation.
 
-- [ ] **Day 04 — Searching and Text Processing**
+#### Day 2: File Operations & Reading
 
-  - Commands: `find`, `grep`, `sort`, `uniq`, `wc`
-  - Combining commands using pipes (`|`)
-  - Filtering and analyzing log files
+**Commands:** `cp`, `mv`, `rm`, `cat`, `less`, `head`, `tail`
 
-- [ ] **Day 05 — Processes and System Monitoring**
+**Practice:**
+- Copy, move, rename, and remove test files.
+- Read file contents using `cat` and `less`.
+- Display the first and last lines of a file.
+- Practise `tail` options, line numbering, and handling blank lines.
 
-  - Commands: `ps`, `top`, `free`, `df`, `du`
-  - Understanding processes, memory, and disk usage
+**Outcome:** Manage files and inspect their contents from the terminal.
 
-- [ ] **Day 06 — Networking Fundamentals**
+**Notes:** `week-01-linux/day-02.md`
 
-  - Commands: `ip`, `ping`, `curl`, `ss`
-  - Understanding IP addresses, ports, DNS, and HTTP
+- [ ] Verify the practical exercise and documentation.
 
-- [ ] **Day 07 — Weekly Review and Practical Lab**
+#### Day 3: Package Manager & Terminal Editor
 
-  - Review the week's Linux commands
-  - Complete a small filesystem and log-analysis exercise
-  - Review notes and resolve outstanding issues
+**Commands:** `sudo apt update`, `apt search`, `apt install`, `nano`
+
+**Practice:**
+- Refresh the local package index using `sudo apt update`.
+- Search for available packages using `apt search`.
+- Install a package using `sudo apt install`.
+- Create and edit a Markdown notes file using Nano.
+- Understand the difference between updating package information and upgrading installed packages.
+
+**Outcome:** Find package information, install software, and edit text files in the terminal.
+
+**Notes:** `week-01-linux/day-03.md`
+
+- [ ] Verify the practical exercise and documentation.
+
+#### Day 4: Linux Users & Groups
+
+**Commands:** `whoami`, `id`, `groups`, `sudo`
+
+**Practice:**
+- Identify the current username using `whoami`.
+- Inspect UID, GID, and group memberships using `id`.
+- List group memberships using `groups`.
+- Understand common groups such as `sudo`, `adm`, and `users`.
+- Learn how `sudo` executes commands with elevated privileges.
+- Explore group information using `getent group`.
+
+**Outcome:** Understand Linux user identity, numeric IDs, group membership, and basic privilege escalation.
+
+**Notes:** `week-01-linux/day-04.md`
+
+**Progress:** Commands studied and practised; notes prepared. Verify the final exercise and GitHub commit/push before marking the day complete.
+
+- [ ] Verify the practical exercise and documentation.
+- [ ] Commit and push Day 4 notes to GitHub.
+
+#### Day 5: File Permissions & Ownership
+
+**Commands:** `ls -l`, `chmod`, `chown`
+
+**Practice:**
+- Understand read (`r`), write (`w`), and execute (`x`) permissions.
+- Learn the Owner → Group → Others permission order.
+- Change permissions using numeric modes such as `600`, `644`, and `755`.
+- Practise symbolic permissions such as `u+x`, `g-w`, and `o+r`.
+- Change file ownership and groups using `chown`.
+- Verify file permissions and ownership using `ls -l`.
+- Investigate permission behaviour in Ubuntu on WSL.
+
+**Outcome:** Understand basic Linux permissions and ownership, verify access settings, and troubleshoot common permission errors.
+
+**Notes:** `week-01-linux/day-05.md`
+
+- [ ] Complete the hands-on permission and ownership exercise.
+- [ ] Verify the results and document any issues.
+- [ ] Commit and push Day 5 notes to GitHub.
+
+#### Day 6: Searching & Text Processing
+
+**Commands:** `find`, `grep`, `sort`, `uniq`, `wc`
+
+**Practice:**
+- Find files by name.
+- Search file contents for specific text.
+- Sort text and identify duplicate lines.
+- Count lines, words, and characters.
+- Combine commands using pipes (`|`).
+
+**Outcome:** Find files, filter text, and perform basic log analysis.
+
+**Notes:** `week-01-linux/day-06.md`
+
+- [ ] Complete the practical exercise and document the results.
+
+#### Day 7: Processes, Networking & Weekly Review
+
+**Commands:** `ps`, `top`, `free`, `df`, `du`, `ip`, `ping`, `curl`, `ss`
+
+**Practice:**
+- Inspect running processes and system resource usage.
+- Check disk space and directory sizes.
+- Inspect network interfaces and test connectivity.
+- Understand IP addresses, ports, DNS, and HTTP.
+- Review the week's commands through a small practical lab.
+
+**Outcome:** Perform basic system inspection, understand networking fundamentals, and demonstrate the week's Linux skills.
+
+**Notes:** `week-01-linux/day-07.md`
+
+- [ ] Complete the weekly practical lab.
+- [ ] Review and revise earlier notes.
+- [ ] Document outstanding questions and mistakes.
+- [ ] Commit and push the weekly review.
 
 ## Repository Structure
 
@@ -76,32 +162,30 @@ devops-learning/
     ├── day-04.md
     ├── day-05.md
     ├── day-06.md
-    ├── day-07.md
-    └── tail-command.md
+    └── day-07.md
 ```
 
 ## Daily Completion Checklist
 
-For each learning session:
+For every learning session:
 
-- [ ] Understand the concept
-- [ ] Execute the commands in Ubuntu/WSL
-- [ ] Complete the hands-on exercise
-- [ ] Verify the expected output
-- [ ] Document commands, examples, and troubleshooting
-- [ ] Commit and push the notes to GitHub
+- [ ] Understand the concept.
+- [ ] Execute the commands in Ubuntu/WSL.
+- [ ] Complete the hands-on exercise.
+- [ ] Verify the expected output.
+- [ ] Document commands, examples, and troubleshooting.
+- [ ] Review the key concepts.
+- [ ] Commit and push the notes to GitHub.
 
-## Current Focus
-
-**Week 01: Linux Fundamentals**
-
-Currently focusing on Linux file operations, reading files, and log analysis. The next step is to finish and verify the Day 02 practical exercise, document the results, and push the notes to GitHub.
+Mark a day complete only after its practical exercise and documentation have been verified. Track the GitHub push separately if it is still pending.
 
 ## Learning Principles
 
-1. Learn concepts before relying on tools.
-2. Practice commands in a real Linux environment.
-3. Understand what commands do instead of memorizing them.
-4. Document errors, solutions, and lessons learned.
-5. Prioritize practical projects over certification alone.
-6. Build consistent daily habits and review progress weekly.
+1. Learn the concept before relying on tools.
+2. Practise commands in a real Linux environment.
+3. Understand what commands do instead of memorising them.
+4. Use test files when experimenting with potentially destructive commands.
+5. Document errors, troubleshooting steps, and lessons learned.
+6. Prioritise practical exercises over certification alone.
+7. Review earlier topics regularly to improve retention.
+8. Track progress honestly and commit verified work to GitHub.
