@@ -226,6 +226,30 @@ find . -type f -mtime +7
 find . -maxdepth 2 -type f
 ```
 
+### VVV IMPORTANT!
+
+### read data from multiple files as all the files with name test.log will go inside cat as an argument using xargs command
+```bash
+ find . -type f -name 'test.log' | xargs cat
+```
+### sort commands sorts the data by first column and in this case first col is date and if we want to sort on the basis of any other col then we will use -k3 and it will sort on the basis of 3rd column and uniq is used to show unique data means no duplicate and if we want to show uniq on the basis of any col we will use -f4 which will show unique data on the basis of 4th col
+```bash
+find . -type f -name 'test.log' | xargs cat | sort -k3 | uniq -f4
+2026-10-29 10:00:06 ERROR Authentication failed: user_id=205
+```
+
+### it will insert all the errors inside the unique-errors file and if the file doesn't exist then it will create a new one or if we want to append in that file then will just replace the '>' symbol with '>>'
+```bash
+find . -type f -name 'test.log' | xargs cat | sort -k3 | uniq -f3 > unique-errors.log
+```
+
+### In the 'find -exec' command, the curly brackets act as a symbolic placeholder that is replaced by the name of each specific file or directory found by the search. - This allows the subsequent command to process every search result individually, as the system dynamically swaps the brackets for the actual file path during execution.
+### rsync Linux mein files aur folders ko copy aur synchronize karne ke liye use hoti hai. Ye cp se zyada useful ho sakti hai jab tum regular backups banana chahte ho.
+### rsync -R mein -R ka matlab hai Relative paths preserve karna. Ye source files ke relative directory structure ko destination mein maintain karta hai.
+
+find . -type f -name '*.log' -exec cp {} ./devops-test/backup/ \;
+find . -type f -name 'test.log' -exec rsync -R {} ./backup \;
+
 ## 6. Combine `find` with `grep`
 
 Use `find` to locate files and `grep` to search their contents.
